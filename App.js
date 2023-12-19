@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Registration from './screens/Registration';
+import RegisteredChildrenList from './screens/RegisteredChildrenList';
+import ChildProfile from './screens/ChildProfile';
+import NavigationBar from './components/Navigation';
+import Home from './screens/Home';
 
-export default function App() {
+const Stack = createNativeStackNavigator()
+const Tab = createMaterialTopTabNavigator();
+
+// const TopNav = () => (
+//   <Tab.Navigator>
+//     <Tab.Screen name="Register" component={Registration} />
+//     <Tab.Screen name="RegisteredChildren" component={RegisteredChildrenList} />
+//   </Tab.Navigator>
+// );
+
+const App = () => {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+        name = "Home" component={Home} options={{header: () => <NavigationBar />}}/>        
+        <Stack.Screen
+        name = "Register" component={Registration} options={{header: () => <NavigationBar />}}/>
+        <Stack.Screen
+        name = "RegisteredChildren" component={RegisteredChildrenList}/>
+        <Stack.Screen name = "Profile" component={ChildProfile}/>
+      </Stack.Navigator>
+  
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    </NavigationContainer>
+   
+     
+     
+   
+  );
+};
+
+export default App;
