@@ -34,6 +34,7 @@
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-sqlite-2": "^3.6.2",
     "react-native-sqlite-storage": "^6.0.1",
+    "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
     "setimmediate": "^1.0.5"
   },

@@ -5,6 +5,9 @@ import RadioForm from 'react-native-simple-radio-button';
 import { CheckBox } from 'react-native-elements';
 import {firebase} from '../dbconf';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
+
 export default class Registration extends Component {
 
   firstnameInputRef = React.createRef();
@@ -195,7 +198,8 @@ export default class Registration extends Component {
         extraScrollHeight={Platform.OS == "android" ? 32 : 0}
       >
         <View style={styles.container}>
-          <Text style={styles.header}> Registration</Text>
+          
+          <Text style={styles.header}><Icon name="account-plus-outline" size={48} style={styles.icon} /> Registration</Text>
 
           <View style={styles.inputTextWrapper}>
             <TextInput
