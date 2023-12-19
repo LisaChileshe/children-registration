@@ -7,8 +7,7 @@ const Home = () => {
       source={require('../assets/bg2.png')}
       style={styles.background}>
       <View style={styles.container}>
-        {/* Your content goes here */}
-        <Text style={styles.title}>Welcome </Text>
+        <Text style={styles.title}>Child Registration App </Text>
         <Text style={styles.subtitle}>A place for something amazing</Text>
       </View>
     </ImageBackground>
@@ -31,7 +30,8 @@ background: {
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#fff', // Text color
+    justifyContent: 'center',
+    color: '#fff', 
   },
   subtitle: {
     fontSize: 16,

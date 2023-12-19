@@ -3,15 +3,19 @@ import { View, Text, FlatList, Button, StyleSheet, TouchableOpacity, TextInput }
 import { firebase } from '../dbconf';
 import { useNavigation } from '@react-navigation/native';
 
+// RegisteredChildrenList functional component start
 export default function RegisteredChildrenList({ navigation }) {
+  // State variables for managing data and sorting
   const [sortedChildren, setSortedChildren] = useState([]);
   const [ascendingOrder, setAscendingOrder] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
+  // useEffect to fetch data when the component mounts
   useEffect(() => {
     fetchData();
   }, []);
 
+  // Function to fetch data from Firestore
   const fetchData = async () => {
     try {
       const snapshot = await firebase.firestore().collection('registrations').get();
@@ -33,6 +37,7 @@ export default function RegisteredChildrenList({ navigation }) {
     }
   };
 
+  // Function to sort children by age
   const sortByAge = () => {
     const sortedByAge = [...sortedChildren].sort((a, b) =>
       ascendingOrder ? a.age - b.age : b.age - a.age
@@ -41,6 +46,7 @@ export default function RegisteredChildrenList({ navigation }) {
     setAscendingOrder(!ascendingOrder);
   };
 
+  // Function to sort children by name
   const sortByName = () => {
     const sortedByName = [...sortedChildren].sort((a, b) =>
       ascendingOrder
@@ -51,22 +57,12 @@ export default function RegisteredChildrenList({ navigation }) {
     setAscendingOrder(!ascendingOrder);
   };
 
-  const renderChildItem = ({ item }) => {
-    const goToProfile = () => {
-      navigation.navigate('Profile', { child: item });
-    };
-
-    return (
-      <View style={styles.childItem}>
-        <Text>Name: {item.firstname} {item.lastname}</Text>
-        <Text>Age: {item.age}</Text>
-        <Text>Gender: {item.gender}</Text>
-        <Text>Immunizations: {item.immunizations.join(', ')}</Text>
-        <Button title="View Profile" onPress={goToProfile} />
-      </View>
-    );
+  // Function to navigate to a child's profile
+  const goToProfile = (child) => {
+    navigation.navigate('Profile', { child });
   };
 
+  // Function to handle search and filter children
   const handleSearch = () => {
     const filteredChildren = sortedChildren.filter((child) => {
       const fullName = `${child.firstname} ${child.lastname}`.toLowerCase();
@@ -96,6 +92,7 @@ export default function RegisteredChildrenList({ navigation }) {
         </View>
       </View>
 
+      {/* Search input and button */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -109,15 +106,25 @@ export default function RegisteredChildrenList({ navigation }) {
         </TouchableOpacity>
       </View>
 
+      {/* FlatList to display registered children */}
       <FlatList
         data={sortedChildren}
-        renderItem={renderChildItem}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => goToProfile(item)} style={styles.childItem}>
+            <Text>Name: {item.firstname} {item.lastname}</Text>
+            <Text>Age: {item.age}</Text>
+            <Text>Gender: {item.gender}</Text>
+            <Text>Immunizations: {item.immunizations.join(', ')}</Text>
+            <Button title="View Profile" onPress={() => goToProfile(item)} />
+          </TouchableOpacity>
+        )}
         keyExtractor={(item) => item.id}
       />
     </View>
   );
 }
 
+// Styles for the RegisteredChildrenList component
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -154,13 +161,13 @@ const styles = StyleSheet.create({
   },
   sortButton: {
     backgroundColor: '#3498db',
-    padding: 4,
+    padding: 5,
     borderRadius: 10,
     width: '48%', 
   },
   sortButtonText: {
     color: '#ffffff',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
   },

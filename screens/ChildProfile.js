@@ -29,6 +29,7 @@ const ChildProfile = ({ route }) => {
   );
 };
 
+// Styles for the ChildProfile component
 const styles = StyleSheet.create({
   container: {
     flex: 1,

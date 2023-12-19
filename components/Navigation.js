@@ -20,7 +20,7 @@ const NavigationBar = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={navigateToHome} style={styles.button}>
-        <Text>Home</Text>
+        <Text >Home</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={navigateToRegister} style={styles.button}>
         <Text>Register</Text>
@@ -36,8 +36,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: 10,
-    backgroundColor: '#eee',
+    padding: 30,
+    paddingTop:50,
+    backgroundColor: '#d6d6d6',
   },
   button: {
     padding: 10,

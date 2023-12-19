@@ -12,13 +12,6 @@ import Home from './screens/Home';
 const Stack = createNativeStackNavigator()
 const Tab = createMaterialTopTabNavigator();
 
-// const TopNav = () => (
-//   <Tab.Navigator>
-//     <Tab.Screen name="Register" component={Registration} />
-//     <Tab.Screen name="RegisteredChildren" component={RegisteredChildrenList} />
-//   </Tab.Navigator>
-// );
-
 const App = () => {
 
   return (
